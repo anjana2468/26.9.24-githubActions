@@ -19,23 +19,22 @@ jobs:
 
       - name: Install Python packages
         run: |
-              git config --local user.email "action@github.com"
-              git config --local user.name "GitHub Action"
-              if [ -f log.txt ]; then
-                 git add log.txt
-              git commit -m "Update log.txt" || echo "No changes to commit"
-              else
-              echo "log.txt not found"
-              fi
-              python -m pip install --upgrade pip
-              pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Execute python script
         run: python main.py
 
       - name: Commit changes
         run: | 
-          
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          if [ -f log.txt ]; then
+            git add log.txt
+            git commit -m "Update the log.txt" || echo "No changes to commit"
+          else
+            echo "log.txt is not available"
+          fi
       - name: Push changes
         run: |
           git push
